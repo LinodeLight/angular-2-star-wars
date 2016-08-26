@@ -1,0 +1,38 @@
+<div class="people-list-wrapper">
+
+  <div class="people-search-bar">
+    <div class="ui right action left icon input fluid">
+      <input type="search" [(ngModel)]="query" placeholder="Search...">
+      <i class="search icon"></i>
+
+      <div class="ui floating dropdown button" dropdown>
+        <div class="text">Sort</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item" (click)="order = 'name'">A-Z</div>
+          <div class="item" (click)="order = '!name'">Z-A</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="people-list">
+
+    <div *ngIf="error" class="ui red message">{{ error }}</div>
+
+    <spinner text="Loading people..." [show]="loading"></spinner>
+
+    <div class="ui five link cards" *ngIf="!loading && people.length">
+      <div class="card" *ngFor="let person of people | filterByName: query | orderBy: order" (click)="gotoPersonDetail(person)">
+        <div class="image">
+          <img [src]="person.image">
+        </div>
+        <div class="content">
+          <div class="header">{{ person.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="ui inverted huge button fluid" *ngIf="hasMore" (click)="loadMorePeople()" [class.loading]="loadingMore" [class.disabled]="loadingMore">Show more</button>
+</div>

@@ -1,0 +1,25 @@
+<div class="planets-list-wrapper">
+
+  <div class="planets-list">
+  <div *ngIf="error" class="ui red message">{{ error }}</div>
+
+    <spinner text="Loading planets..." [show]="loading"></spinner>
+
+    <div class="ui two link cards" *ngIf="!loading && planets.length">
+      <div class="card" *ngFor="let planet of planets" (click)="gotoPlanetDetail(planet)">
+        <div class="image">
+          <img [src]="planet.image" size="wide">
+        </div>
+        <div class="content">
+          <div class="header">{{ planet.name }}</div>
+          <div class="description">
+            <div>Terrain: {{ planet.terrain }}</div>
+            <div>Population: {{ planet.population }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="ui inverted huge button fluid" *ngIf="hasMore" (click)="loadMorePlanets()" [class.loading]="loadingMore" [class.disabled]="loadingMore">Show more</button>
+</div>

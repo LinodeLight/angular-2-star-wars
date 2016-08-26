@@ -1,0 +1,57 @@
+<div class="details-wrapper">
+  <div *ngIf="error" class="ui red message">{{ error }}</div>
+
+  <spinner text="Loading planet details..." [show]="loading"></spinner>
+
+  <div class="planet-detail" *ngIf="!loading && planet">
+
+    <h2 class="ui dividing header">{{ planet.name }}</h2>
+
+    <div class="ui grid">
+      <div class="four wide column">
+        <img [src]="planet.image">
+      </div>
+
+      <div class="four wide column">
+        <div class="planet-details">
+          <div class="ui list">
+            <div class="item"><b>Rotation period</b>: {{ planet.rotation_period }}</div>
+            <div class="item"><b>Orbital period</b>: {{ planet.orbital_period }}</div>
+            <div class="item"><b>Diameter</b>: {{ planet.diameter }}</div>
+            <div class="item"><b>Climate</b>: {{ planet.climate }}</div>
+            <div *ngIf="planet.murky" class="item"><b>Murky</b>: {{ planet.murky }}</div>
+            <div class="item"><b>Gravity</b>: {{ planet.gravity }}</div>
+            <div class="item"><b>Terrain</b>: {{ planet.terrain }}</div>
+            <div class="item"><b>Surface</b> water: {{ planet.surface_water }}</div>
+            <div class="item"><b>Population</b>: {{ planet.population }}</div>
+            <div class="item"><b>URL</b>: <a [href]="planet.url" target="_blank">{{ planet.url }}</a></div>
+            <div class="item" *ngIf="planet.films.length">
+              <div><b>Films</b> ({{ planet.films.length }}):</div>
+              <div class="list">
+                <div class="item" *ngFor="let film of planet.films">
+                  <a [href]="film" target="_blank">{{ film }}</a>
+                </div>
+              </div>
+            </div>
+            <div class="item" *ngIf="planet.residents.length">
+              <div><b>Residents</b> ({{ planet.residents.length }}):</div>
+              <div class="list">
+                <div class="item" *ngFor="let resident of planet.residents">
+                  <a [href]="resident" target="_blank">{{ resident }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="eight wide column" *ngIf="!chartLoadingFailed">
+        <spinner text="Loading chart data..." [show]="!chartDataIsReady && !chartNoData"></spinner>
+
+        <h3 class="text-center" *ngIf="chartNoData"></h3>
+
+        <chart [options]="chartOptions" *ngIf="chartDataIsReady && !chartNoData"></chart>
+      </div>
+    </div>
+  </div>
+</div>

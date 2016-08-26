@@ -1,0 +1,9 @@
+<div class="ui top menu inverted">
+  <div class="ui container">
+    <a [routerLink]="['Home']" [class.active]="isActive(['Home'])" class="item">
+      <img src="/assets/images/logo.png">
+    </a>
+    <a [routerLink]="['PlanetsList']" [class.active]="isActive(['PlanetsList'])" class="item">Planets</a>
+    <a [routerLink]="['PeopleList']" [class.active]="isActive(['PeopleList'])" class="item">People</a>
+  </div>
+</div>

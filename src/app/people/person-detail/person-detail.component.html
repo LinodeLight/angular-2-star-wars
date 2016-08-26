@@ -1,0 +1,102 @@
+<div class="details-wrapper">
+  <spinner text="Loading person details..." [show]="loading"></spinner>
+
+  <div *ngIf="error" class="ui red message">{{ error }}</div>
+
+  <div class="person-detail" *ngIf="!loading && person">
+
+    <h2 class="ui dividing header">{{ person.name }}</h2>
+
+    <div class="ui grid">
+      <div class="four wide column">
+        <img [src]="person.image">
+      </div>
+      <div class="five wide column">
+        <div class="ui list">
+          <div class="item"><b>Height</b>: {{ person.height }}</div>
+          <div class="item"><b>Mass</b>: {{ person.mass }}</div>
+          <div class="item"><b>Hair color</b>: {{ person.hair_color }}</div>
+          <div class="item"><b>Skin color</b>: {{ person.skin_color }}</div>
+          <div class="item"><b>Eye color</b>: {{ person.eye_color }}</div>
+          <div class="item"><b>Birth year</b>: {{ person.birth_year }}</div>
+          <div class="item"><b>Gender</b>: {{ person.gender }}</div>
+          <div class="item"><b>Homeworld</b>: <a [href]="person.homeworld" target="_blank">{{ person.homeworld }}</a></div>
+          <div class="item"><b>URL</b>: <a [href]="person.url" target="_blank">{{ person.url }}</a></div>
+          <div class="item" *ngIf="person.films.length">
+            <div><b>Films</b> ({{ person.films.length }}):</div>
+            <div class="list">
+              <div class="item" *ngFor="let film of person.films">
+                  <a [href]="film" target="_blank">{{ film }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="item" *ngIf="person.species.length">
+            <div><b>Species</b> ({{ person.species.length }}):</div>
+            <div class="list" *ngIf="person.species.length">
+              <div class="item" *ngFor="let species of person.species">
+                <a [href]="species" target="_blank">{{ species }}</a>
+                </div>
+            </div>
+          </div>
+          <div class="item" *ngIf="person.starships.length">
+            <div><b>Starships</b> ({{ person.starships.length }}):</div>
+            <div class="list" *ngIf="person.starships.length">
+              <div class="item" *ngFor="let starship of person.starships">
+                <a [href]="starship" target="_blank">{{ starship }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="item" *ngIf="person.vehicles.length">
+            <div><b>Vehicles</b> ({{ person.vehicles.length }}):</div>
+            <div class="list" *ngIf="person.vehicles.length">
+              <div class="item" *ngFor="let vehicle of person.vehicles">
+                <a [href]="vehicle" target="_blank">{{ vehicle }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <button type="button" [class.disabled]="planetLoading" [class.loading]="planetLoading" class="ui black basic huge button fluid" (click)="togglePlanetDetails()">{{ !planetDisplaying || planetLoading ? 'Show home planet details' : 'Hide home planet details' }}</button>
+
+        <div class="ui grid" *ngIf="planetDisplaying && planet">
+          <div class="nine wide column">
+            <img [src]="planet.image">
+          </div>
+
+          <div class="seven wide column">
+            <div class="ui list">
+              <div class="item"><b>Name</b>: {{ planet.name }}</div>
+              <div class="item"><b>Rotation period</b>: {{ planet.rotation_period }}</div>
+              <div class="item"><b>Orbital period</b>: {{ planet.orbital_period }}</div>
+              <div class="item"><b>Diameter</b>: {{ planet.diameter }}</div>
+              <div class="item"><b>Climate</b>: {{ planet.climate }}</div>
+              <div *ngIf="planet.murky" class="item"><b>Murky</b>: {{ planet.murky }}</div>
+              <div class="item"><b>Gravity</b>: {{ planet.gravity }}</div>
+              <div class="item"><b>Terrain</b>: {{ planet.terrain }}</div>
+              <div class="item"><b>Surface water</b>: {{ planet.surface_water }}</div>
+              <div class="item"><b>Population</b>: {{ planet.population }}</div>
+              <div class="item"><b>URL</b>: <a [href]="planet.url" target="_blank">{{ planet.url }}</a></div>
+              <div class="item" *ngIf="planet.films.length">
+                <div><b>Films</b> ({{ planet.films.length }}):</div>
+                <div class="list">
+                  <div class="item" *ngFor="let film of planet.films">
+                    <a [href]="film" target="_blank">{{ film }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="item" *ngIf="planet.residents.length">
+                <div><b>Residents</b> ({{ planet.residents.length }}):</div>
+                <div class="list">
+                  <div class="item" *ngFor="let resident of planet.residents">
+                    <a [href]="resident" target="_blank">{{ resident }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div>
+      </div>
+    </div>
+  </div>
+</div>
